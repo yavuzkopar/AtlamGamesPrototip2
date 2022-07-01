@@ -7,12 +7,15 @@ public class GameManager : MonoBehaviour
 {
     public UnityEvent finalMoment;
     public UnityEvent failMoment;
-    public int brickGoal;
     [SerializeField] CinemachineVirtualCamera virtualCamera;
     [SerializeField] GameObject jStick;
 
-    public static GameManager instance;
+    
     public Transform finalpoints;
+
+    private static GameManager instance;
+
+    public static GameManager Instance { get { return instance; } }
     private void Awake()
     {
         instance = this;

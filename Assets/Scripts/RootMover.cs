@@ -7,12 +7,10 @@ public class RootMover : MonoBehaviour
 {
     Transform mRoot;
     [SerializeField] Direction direction;
-    PlayerController controller;
 
     void Start()
     {
         mRoot = GameObject.FindGameObjectWithTag("RootObject").transform;
-        controller = mRoot.GetComponent<PlayerController>();
     }
     Vector2 merkezBulucu = Vector2.zero;
     private void OnTriggerEnter(Collider other)
@@ -20,11 +18,9 @@ public class RootMover : MonoBehaviour
         if(other.gameObject.CompareTag("Bound") && gameObject.CompareTag("MyBound"))
         {
             Transform tp = other.transform.parent;
-            Debug.Log("aaaaa");
             tp.parent = mRoot;
             mRoot.DOShakePosition(0.5f, 0.6f);
             mRoot.DOShakeScale(0.5f, 0.4f).OnComplete(() => mRoot.localScale = Vector3.one);
-          //  GameManager.instance.brickGoal++;
             switch (direction)
             {
                 case Direction.Left:
@@ -57,28 +53,6 @@ public class RootMover : MonoBehaviour
             {
                 item.tag = "MyBound";
             }
-        }
-        
-        else if (other.gameObject.CompareTag("FinalBound"))
-        {
-            
-          /*  if (mRoot.childCount -1 == GameManager.instance.finalpoints.childCount)
-            {
-                if (controller.a == GameManager.instance.finalpoints.childCount)
-                {
-                    controller.transform.position = controller.finalPos.position;
-                    mRoot.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-                    //  controller.enabled = false;
-                    GameManager.instance.finalMoment?.Invoke();
-                }
-            }
-            else
-            {
-                mRoot.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-              //  controller.enabled = false;
-                GameManager.instance.failMoment?.Invoke();
-            }*/
-                
         }
     }
 
